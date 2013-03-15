@@ -175,3 +175,11 @@ Full Example:
 	}
 	?>
 
+
+Contribute
+----------
+
+Contributions, remarks, improvements, etc. are always welcome. 
+
+Please submit contributions to the `dev` branch or [submit an issue](https://github.com/DenitS/yii-apiAuth/issues/new) in the github repository
+
