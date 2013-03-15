@@ -54,7 +54,7 @@ Configuration
 -------------
 
 main.php
-
+```php
 	<?php
 	return array(
 		#...
@@ -110,6 +110,7 @@ main.php
 		#...
 	);
 	?>	
+```
 
 Securing Controllers
 --------------------
@@ -119,20 +120,23 @@ Secure controllers and actions by extending your controller with AController (No
 
 Example:	
 
+```php
 	<?php
 	class YourController extends AController {
-
+```
 
 Make sure you don't do it the other way around, for example:
 
+```php
 	<?php
 	class Controller extends AController { //this would create an infinate extends loop.
-
+```
 
 Add the AAuthFilter to your controller's filter() method.
 
 Full Example:
 
+```php
 	<?php 
 	class YourController extends AController { //note: AController extends Controller, so this should not break your existing configuration.
 
@@ -174,7 +178,7 @@ Full Example:
 		*/
 	}
 	?>
-
+```
 
 Contribute
 ----------
