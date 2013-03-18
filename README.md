@@ -72,17 +72,17 @@ main.php
 				// Below are the Extensions configurable attributes, specified with their default values.
 				// The optional values can be left out of the configuration file (will get default values specified here)
 
-				'realm' => 'Restricted Area',						//optional
+				'realm' => 'Restricted Area',					//optional
 				'protocol' => 'digest',							//optional: 'basic' or 'digest' (recommended)
-				'hash' => null,								//optional: empty or 'md5' (recommended. See comment on apiAuthPasswordAttribute)
+				'hash' => null,									//optional: empty or 'md5' (recommended. See comment on apiAuthPasswordAttribute)
 				// The name of your (api) user model (i.e.: this can be your front-end User model, or a custom Api User model)
-				'userClass' => 'User',							//required
+				'userClass' => 'User',								//required
 				// Let apiAuth know where to find required user model attributes
-				'userIdAttribute' => 'id',						//required
+				'userIdAttribute' => 'id',							//required
 				'usernameAttribute' => 'username',					//required, will be used for authentication, unless apiAuthUsernameAttribute is set.
 				'passwordAttribute' => 'password',					//required, will be used for authentication, unless apiAuthPasswordAttribute is set.
 				//You can specify a different username for API authentication, which doesn't have to be the same as 'usernameAttribute'. When left unset, this value will be set to the same value as usernameAttribute
-				'apiAuthUsernameAttribute' => 'username',				//optional, when left unset, this property will take it's value from 'usernameAttribute'
+				'apiAuthUsernameAttribute' => 'username',			//optional, when left unset, this property will take it's value from 'usernameAttribute'
 				// IMPORTANT note about 'apiAuthPasswordAttribute': 
 				// apiAuth uses the value of apiAuthPasswordAttribute for password verification. 
 				// It's property MUST be availble in the user model. It can be left empty or unspecified
@@ -98,12 +98,12 @@ main.php
 				// The application's realm setting should NEVER be changed after storing digest encrypted passwords.
 				// If the application's realm or the username changes, the encrypted password should be 
 				// updated as well, which shall be quite difficult to do if you don't have the unencrypted password.
-				'apiAuthPasswordAttribute' => 'api_password',				//optional, when left unset, this property will take it's value from 'passwordAttribute'
+				'apiAuthPasswordAttribute' => 'api_password',			//optional, when left unset, this property will take it's value from 'passwordAttribute'
 				'activeAttribute' => null,						//optional, specify your user models boolean 'is active' attribute if it has one. When the user's attribute evalutes to false, authentication will fail.
 				'blockedAttribute' => null,						//optional, specify your user models boolean 'is blocked' attribute if it has one. When the user's attribute evalutes to true, authentication will fail.
 				// It is strongly recommended to leave the following setting on it's default value. 
 				// If you do override it, make sure you change it to a derived class of AUserIdentity.
-				//'userIdentityClass' => 'AUserIdentity',				//optional
+				//'userIdentityClass' => 'AUserIdentity',			//optional
 			),
 			#...
 		),
