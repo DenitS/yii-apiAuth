@@ -1,22 +1,40 @@
 <?php
 /**
- * HttpDigest
+ * AHttpAuthenticatorDigest
+ * 
+ * @see RFC2617 http://www.ietf.org/rfc/rfc2617.txt
  *
  * @copyright (c) 2013, Denit Serp <denit.serp at gmail.com>
  * 
  */
 class AHttpAuthenticatorDigest extends AHttpAuthenticator implements IAHttpAuthenticator {
 	
-	public $qop = "auth,auth-int"; //supported Quality of Protection methods. Do not change.
+	/**
+	 * Quality of Protection methods supported by the server. 
+	 * Do not change this value unless you have to.
+	 * 
+	 * Allowed values: 
+	 *  - 'auth' (recommended for compatibility reasons, even though auth,auth-int is supported as well)
+	 *  - 'auth,auth-int'
+	 *  - 'auth-int' 
+	 * 
+	 * For python clients that use urrllib2 and have problems connecting: set this value to 'auth' only.
+	 * (@see bugs.python.org issues #1667860 and #9714)
+	 * 
+	 * @var string
+	 */
+	public $qop = "auth"; 
 	
 	/**
 	 * @var AHttpDigest
 	 */
 	protected $receivedDigest;
+	
 	/**
 	 * @var Nonce
 	 */
 	protected $nonce;
+	
 	/*
 	 * This value is only set to true if $this->testChallengeResponse is called and returns true. 
 	 * If it's not called, the useridentity does not implement the challenge response mechanim
@@ -89,11 +107,21 @@ class AHttpAuthenticatorDigest extends AHttpAuthenticator implements IAHttpAuthe
 	}
 	
 	/**
-	 * This function will be called when the user is cannot be authenticated
+	 * This function will be called when the user cannot be authenticated
 	 */
 	public function unauthenticated($message = 'Unauthorized')
 	{
 		$this->sendDigestResponseHeaders();
+		
+		//No digest received. Step 1 in authentication handshake.
+		if(!isset($this->receivedDigest)) {
+			//quit immediately with HTTP 401 (slight speedup, compared to Yii::app()->end() which allows for finalization of CWebApplication, logging, etc.)
+			header("HTTP/1.0 401 " . $message);
+			exit; 
+		}
+		
+		//Digest received. Step 2 in authentication handshake. 
+		//Apparently still unauthenticated. client must be specifying wrong header (i.e. wrong credentials, invalid header, etc.)
 		throw new CHttpException(401, $message);
 	}
 	
