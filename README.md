@@ -3,7 +3,7 @@ Yii ApiAuth Extension
 
 ApiAuth : The first A in AAA
 
-Authenticate a user through Http Authentication Methods like Http Digest or 
+Authenticate a (REST) client through Http Authentication Methods like Http Digest or 
 Http Basic (or implement your own authentication scheme)
 
 Most webservers, like Apache or IIS support different types of HTTP authentication, but they 
