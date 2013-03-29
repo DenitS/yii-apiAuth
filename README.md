@@ -146,7 +146,7 @@ Full Example:
 			//
 			//If you need further access control (authorization) you can specifiy other filters here, 
 			//just make sure you specify ApiAuth as the first filter! 
-			//Aauthorization is slightly difficult when performed before authentication ;)
+			//Authorization is slightly difficult when performed before authentication ;)
 			//
 			//For example, to use Yii's access control as authorization scheme, change this to:
 			//
