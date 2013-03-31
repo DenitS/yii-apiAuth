@@ -180,6 +180,21 @@ Full Example:
 	?>
 ```
 
+HTTP Digest: cleaning up Nonces
+-------------------------------
+
+Over time the nonce table will grow in size. You will have to clean it periodically,
+but you will have to do this manually. I didn't want to call a DELETE FROM statement on every 
+request, so i've created a static method in the ANonce model class that you can 
+call whenever and wherever you like (See below). 
+
+For example it can be called from a yii command script,
+which you can in turn call via a cron job or the windows task scheduler. 
+
+```php
+ANonce::cleanExpiredNonces();
+```
+
 Contribute
 ----------
 
