@@ -137,7 +137,9 @@ class AHttpAuthenticatorDigest extends AHttpAuthenticator implements IAHttpAuthe
 		$challenge = $this->createDigestChallenge($password);
 		$response = $this->receivedDigest->response;
 		
-		return $this->_challengeResponseValidated = ($challenge == $response);
+		$this->_challengeResponseValidated = equals_ct($challenge, $response);
+		
+		return $this->_challengeResponseValidated;
 	}
 	
 	/* ------------------- HELPER METHODS ------------------- */
