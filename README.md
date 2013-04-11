@@ -3,7 +3,7 @@ Yii ApiAuth Extension
 
 ApiAuth : The first A in AAA
 
-Authenticate a user through Http Authentication Methods like Http Digest or 
+Authenticate a (REST) client through Http Authentication Methods like Http Digest or 
 Http Basic (or implement your own authentication scheme)
 
 Most webservers, like Apache or IIS support different types of HTTP authentication, but they 
@@ -146,7 +146,7 @@ Full Example:
 			//
 			//If you need further access control (authorization) you can specifiy other filters here, 
 			//just make sure you specify ApiAuth as the first filter! 
-			//Aauthorization is slightly difficult when performed before authentication ;)
+			//Authorization is slightly difficult when performed before authentication ;)
 			//
 			//For example, to use Yii's access control as authorization scheme, change this to:
 			//
@@ -178,6 +178,21 @@ Full Example:
 		*/
 	}
 	?>
+```
+
+HTTP Digest: cleaning up Nonces
+-------------------------------
+
+Over time the nonce table will grow in size. You will have to clean it periodically,
+but you will have to do this manually. I didn't want to call a DELETE FROM statement on every 
+request, so i've created a static method in the ANonce model class that you can 
+call whenever and wherever you like (See below). 
+
+For example it can be called from a yii command script,
+which you can in turn call via a cron job or the windows task scheduler. 
+
+```php
+ANonce::cleanExpiredNonces();
 ```
 
 Contribute
