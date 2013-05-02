@@ -14,6 +14,6 @@ class AIdentityBehaviorBasic extends AIdentityBehavior {
 	public function apiAuthValidatePassword($password)
 	{
 		//compare user supplied password against the password we know.
-		return $this->passwordValidationResult = (ApiAuth::encryptBasic($this->owner->password) === $password);
+		return (ApiAuth::encryptBasic($this->owner->password) === $password);
 	}
 }
