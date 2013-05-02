@@ -1,6 +1,6 @@
 {
     "name": "denits/yii-apiauth",
-    "type": "yii-extension",
+    "type": "libary",
     "license": "New BSD License",
 	"description": "HTTP authentication for automated requests",
     "keywords": ["yii","authentication","basic","digest"],
@@ -14,6 +14,5 @@
     ],
     "require": {
         "php": ">=5.3.16",
-        "composer/installers": "~1.0"
     }
 }
