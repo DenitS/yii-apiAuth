@@ -1,5 +1,5 @@
 {
-    "name": "DenitS/yii-apiAuth",
+    "name": "denits/yii-apiauth",
     "type": "yii-extension",
     "license": "New BSD License",
 	"description": "HTTP authentication for automated requests",
