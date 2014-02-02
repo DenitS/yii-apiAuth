@@ -44,9 +44,9 @@ Installation
 ------------
 
 1. Add apiAuth to the extensions folder:  
-	1 .Manual:  
-		1. Create a folder 'apiAuth' in the extensions folder (application.extensions)
-		2. Copy the contents of the yii-apiAuth extension to it.
+	1. Manual:  
+		1. Create a folder 'apiAuth' in the extensions folder (application.extensions)  
+		2. Copy the contents of the yii-apiAuth extension to it.  
 
 	2. Git Submodule (from command line in [webroot]/protected/extensions/):  
 		1. $ `git submodule add git@github.com:DenitS/yii-apiAuth.git apiAuth`  
