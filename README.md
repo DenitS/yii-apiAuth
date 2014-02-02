@@ -50,8 +50,8 @@ Installation
 
 	Git Submodule:  
 	from command line:  
-	1. $ cd [webroot]/protected/extensions/
-	2. $ git submodule add git@github.com:DenitS/yii-apiAuth.git apiAuth
+	1. `$ cd [webroot]/protected/extensions/`  
+	2. `$ git submodule add git@github.com:DenitS/yii-apiAuth.git apiAuth`  
 
 
 2. Create the nonce table by running:
