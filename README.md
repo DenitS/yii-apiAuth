@@ -43,9 +43,18 @@ Requirements
 Installation
 ------------
 
-1. Create a folder 'apiAuth' in the extensions folder (application.extensions)
-2. Copy the contents of the yii-apiAuth extension to it.
-3. Create the nonce table by running:
+1. Add apiAuth to the extensions folder: 
+	Manual:
+	1. Create a folder 'apiAuth' in the extensions folder (application.extensions)
+	2. Copy the contents of the yii-apiAuth extension to it.
+
+	Git Submodule:
+	from command line: 
+	1. $ cd [webroot]/protected/extensions/
+	2. $ git submodule add git@github.com:DenitS/yii-apiAuth.git apiAuth
+
+
+2. Create the nonce table by running:
 
 	$ ./yiic migrate up --migrationPath=ext.apiAuth.migrations
 
