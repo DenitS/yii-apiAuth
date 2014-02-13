@@ -102,9 +102,9 @@ class ANonce extends CActiveRecord
 	{
 		$maxExpTime = time() + self::$expiredNonceRetentionTime;
 		self::model()->deleteAll(array(
-			'condition' => 'expires_at < :maxExpTime',
+			'condition' => 'expires_at < :max_exp_time',
 			'params' => array(
-				':exp_date' => $maxExpTime
+				':max_exp_time' => $maxExpTime
 			),
 		));
 	}
