@@ -136,4 +136,3 @@ class AUserIdentity extends CUserIdentity
 		return $this->_name;
 	}
 }
-?>
