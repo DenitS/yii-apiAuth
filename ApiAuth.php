@@ -55,8 +55,11 @@ class ApiAuth extends CComponent {
 		
 		//set optional paramaters
 		$this->initParameters();
-		//validate them
-		$this->validateParameters();
+		
+		if(YII_DEBUG) {
+			//validate them
+			$this->validateParameters();
+		}
 	}
 	
 	private function initParameters()
@@ -138,7 +141,17 @@ class ApiAuth extends CComponent {
 		}
 		
 		if(!class_exists($this->userClass))
-			throw new Exception('Invalid apiAuth parameter: ' . $this->userClass . ". Class not found.");
+			throw new Exception('Invalid apiAuth parameter userClass: ' . $this->userClass . ". Class not found.");
+		
+		if(!property_exists($this->userClass, $this->userIdAttribute)) 
+			throw new Exception('Invalid apiAuth parameter userIdAttribute: ' . $this->userIdAttribute . ". Property not found.");
+		
+		if(!property_exists($this->userClass, $this->usernameAttribute)) 
+			throw new Exception('Invalid apiAuth parameter usernameAttribute: ' . $this->usernameAttribute . ". Property not found.");
+		
+		if(!property_exists($this->userClass, $this->passwordAttribute)) 
+			throw new Exception('Invalid apiAuth parameter passwordAttribute: ' . $this->passwordAttribute . ". Property not found.");
+		
 		if(!class_exists($this->userIdentityClass))
 			throw new Exception('Invalid apiAuth parameter: ' . $this->userClass . ". Class not found.");
 	}

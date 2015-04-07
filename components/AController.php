@@ -6,13 +6,8 @@
  * 
  * @copyright (c) 2013, Denit Serp <denit.serp at gmail.com>
  */
-class AController extends Controller {
-	
-	public function init()
-	{
-		Yii::app()->apiAuth;
-		return parent::init();
-	}
+class AController extends Controller 
+{
 	
 	/**
 	 * Returns the authentication rules for this controller.
@@ -32,6 +27,9 @@ class AController extends Controller {
 	 */
 	public function filterApiAuth($filterChain)
 	{
+		//init extension before all else. Makes sure everything becomes autoloadable.
+		Yii::app()->apiAuth;
+		
 		ApiAuth::beginProfile("ext.apiAuth.AController.filterApiAuth()", "ext.apiAuth.AController");
 		
 		$filter=new AAuthFilter;
