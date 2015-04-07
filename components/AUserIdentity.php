@@ -49,8 +49,8 @@ class AUserIdentity extends CUserIdentity
 		//OK! all checks passed. yay!
 		
 		//set identity properties
-		$this->_id = $user->getAttribute(Yii::app()->apiAuth->userIdAttribute);
-		$this->_name = $user->getAttribute(Yii::app()->apiAuth->usernameAttribute);
+		$this->_id = $user->{Yii::app()->apiAuth->userIdAttribute};
+		$this->_name = $user->{Yii::app()->apiAuth->usernameAttribute};
 		
 		//return true
 		$this->errorCode = self::ERROR_NONE;
@@ -122,8 +122,7 @@ class AUserIdentity extends CUserIdentity
 	private function _isValidApiAuthPassword($user)
 	{
 		//Validate with apiAuth mechanism
-		$apiPasswordAttr = Yii::app()->apiAuth->apiAuthPasswordAttribute;
-		$apiAuthPassword = $user->$apiPasswordAttr;
+		$apiAuthPassword = $user->{Yii::app()->apiAuth->apiAuthPasswordAttribute};
 		return ($this->isValidApiAuthPassword($apiAuthPassword) === true);
 	}
 	
