@@ -35,6 +35,9 @@ class ApiAuth extends CComponent {
 	public $activeAttribute; //leave empty if your user model doesn't have this. When this property is used and it evaluates to false, access will be denied when using AUserIdentity.
 	public $blockedAttribute; //leave empty if your user model doesn't have this. When this property is used and it evaluates to true, access will be denied when using AUserIdentity.
 	
+	//debug
+	public $debug = false;
+	
 	//profiling
 	public $enableProfiling = false;
 	
@@ -56,7 +59,7 @@ class ApiAuth extends CComponent {
 		//set optional paramaters
 		$this->initParameters();
 		
-		if(YII_DEBUG) {
+		if($this->debug) {
 			//validate them
 			$this->validateParameters();
 		}
@@ -123,37 +126,33 @@ class ApiAuth extends CComponent {
 		return self::$tablePrefix;
 	}
 	
-	private function validateParameters()
+	private function ensureParamRequired($param)
 	{
-		//check required params
-		$requiredParams = array(
-			'userClass',
-			'userIdentityClass',
-			'userIdAttribute',
-			'usernameAttribute',
-			'passwordAttribute',
-			'apiAuthUsernameAttribute',
-			'apiAuthPasswordAttribute',
-		);
-		foreach($requiredParams as $param) {
-			if(empty($this->$param))
-				throw new Exception("Missing required apiAuth parameter: " . $param);
+		if(empty($this->$param)) {
+			throw new Exception("ApiAuth extension misconfigured. Missing required parameter: " . $param);
 		}
+	}
+	
+	private function ensureParamClassExists($param)
+	{
+		$className = $this->$param;
+		if(!class_exists($className)) {
+			throw new Exception("ApiAuth extension misconfigured. Invalid parameter $param. Class $className not found.");
+		}
+	}
+	
+	private function validateParameters()
+	{	
+		$this->ensureParamRequired('userClass');
+		$this->ensureParamRequired('userIdentityClass');
+		$this->ensureParamRequired('userIdAttribute');
+		$this->ensureParamRequired('usernameAttribute');
+		$this->ensureParamRequired('passwordAttribute');
+		$this->ensureParamRequired('apiAuthUsernameAttribute');
+		$this->ensureParamRequired('apiAuthPasswordAttribute');
 		
-		if(!class_exists($this->userClass))
-			throw new Exception('Invalid apiAuth parameter userClass: ' . $this->userClass . ". Class not found.");
-		
-		if(!property_exists($this->userClass, $this->userIdAttribute)) 
-			throw new Exception('Invalid apiAuth parameter userIdAttribute: ' . $this->userIdAttribute . ". Property not found.");
-		
-		if(!property_exists($this->userClass, $this->usernameAttribute)) 
-			throw new Exception('Invalid apiAuth parameter usernameAttribute: ' . $this->usernameAttribute . ". Property not found.");
-		
-		if(!property_exists($this->userClass, $this->passwordAttribute)) 
-			throw new Exception('Invalid apiAuth parameter passwordAttribute: ' . $this->passwordAttribute . ". Property not found.");
-		
-		if(!class_exists($this->userIdentityClass))
-			throw new Exception('Invalid apiAuth parameter: ' . $this->userClass . ". Class not found.");
+		$this->ensureParamClassExists('userClass');
+		$this->ensureParamClassExists('userIdentityClass');
 	}
 	
 	public static function beginProfile($token, $category='ext.apiAuth') {
